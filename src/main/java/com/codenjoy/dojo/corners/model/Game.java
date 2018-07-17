@@ -2,6 +2,7 @@ package com.codenjoy.dojo.corners.model;
 
 import com.codenjoy.dojo.corners.model.items.Check;
 import com.codenjoy.dojo.corners.model.services.Colours;
+import com.codenjoy.dojo.corners.model.services.GameOverException;
 import com.codenjoy.dojo.corners.model.services.IllegalChangeParameterException;
 import com.codenjoy.dojo.corners.model.services.WrongStepException;
 
@@ -77,6 +78,37 @@ public class Game {
   }
 
   private void checkGameOver() {
+    if( field
+            .getChecks()
+            .stream()
+            .filter(z->z.getColour() == Colours.BLACK)
+            .allMatch(x->x.isInHouse(false))
+            &&
+        field
+            .getChecks()
+            .stream()
+            .filter(z->z.getColour() == Colours.WHITE)
+            .anyMatch(x->!x.isInHouse(false))
+            ){
+      throw new GameOverException("Black wins!");
+    }
+
+    if( field
+            .getChecks()
+            .stream()
+            .filter(z->z.getColour() == Colours.WHITE)
+            .allMatch(x->x.isInHouse(false))
+        &&
+        field
+            .getChecks()
+            .stream()
+            .filter(z->z.getColour() == Colours.BLACK)
+            .anyMatch(x->!x.isInHouse(false))
+        &&
+        turn == Colours.BLACK
+            ){
+      throw new GameOverException("White wins!");
+    }
 
   }
 }

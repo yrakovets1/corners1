@@ -63,7 +63,9 @@ public class GameTest {
     game.start();
 
     game.makeMove(player1, 2, 2, 2, 3);
+    game.makeMove(player2, 5, 5, 5, 4);
     Assert.assertEquals(Colours.WHITE, game.getField().getCheck(2,3).getColour());
+    Assert.assertEquals(Colours.BLACK, game.getField().getCheck(5,4).getColour());
 
   }
 
