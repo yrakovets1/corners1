@@ -1,9 +1,10 @@
 package com.codenjoy.dojo.corners.model;
 
-import com.codenjoy.dojo.corners.model.items.Checks;
+import com.codenjoy.dojo.corners.model.items.Check;
 import com.codenjoy.dojo.corners.model.services.WrongStepException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -15,14 +16,14 @@ public class Field {
     private int size;
     private int houseHorizontal;
     private int houseVertical;
-    private List<Checks> checks;
+    private List<Check> checks;
 
     public Field(int size, int houseHorizontal, int houseVertical)
     {
 
-        if (houseHorizontal > size/2) throw new IllegalArgumentException("HouseHorisontal is too big");
+        if (houseHorizontal > size/2) throw new IllegalArgumentException("HouseHorizontal is too big");
         if (houseVertical > size/2) throw new IllegalArgumentException("HouseVertical is too big");
-        if (houseHorizontal < 0) throw new IllegalArgumentException("HouseVertical is negative");
+        if (houseHorizontal < 0) throw new IllegalArgumentException("HouseHorizontal is negative");
         if (houseVertical < 0) throw new IllegalArgumentException("HouseVertical is negative");
         if (size < 0) throw new IllegalArgumentException("Size is negative");
 
@@ -30,12 +31,12 @@ public class Field {
         this.size = size;
         this.houseHorizontal = houseHorizontal;
         this.houseVertical = houseVertical;
-        checks = new ArrayList<Checks>();
+        checks = new ArrayList<>();
         IntStream
                 .range(0, houseHorizontal)
                 .map(x ->IntStream
                         .range(0,houseVertical)
-                        .map(y-> {checks.add(new Checks(x,y,WHITE, this)); checks.add(new Checks(size - x -1, size - y -1, BLACK, this)); return 0;})
+                        .map(y-> {checks.add(new Check(x,y,WHITE, this)); checks.add(new Check(size - x -1, size - y -1, BLACK, this)); return 0;})
                         .sum()
                 )
                 .sum();
@@ -45,7 +46,7 @@ public class Field {
         return size;
     }
 
-    public List<Checks> getChecks() {
+    public List<Check> getChecks() {
         return checks;
     }
 
@@ -61,9 +62,35 @@ public class Field {
         return checks.stream().noneMatch(z-> z.getX() == x && z.getY() == y);
     }
 
-    public Checks getCheck(int x, int y) {
-        Optional<Checks> check = checks.stream().filter(z->z.getX() == x && z.getY() == y).findFirst();
+    public Check getCheck(int x, int y) {
+        Optional<Check> check = checks.stream().filter(z->z.getX() == x && z.getY() == y).findFirst();
         if(!check.isPresent()) throw new WrongStepException();
         return check.get();
+    }
+
+    public String toString()
+    {
+        String block = "+-";
+        StringBuilder out = new StringBuilder();
+        IntStream
+                .range(0,size)
+                .map(y-> {
+            out.append(IntStream.range(0, size).boxed().map(x -> block).reduce("", String::concat));
+            out.append("+\n");
+            out.append(IntStream.range(0, size).mapToObj(x -> "|" + ceilToString(x,size - y - 1)).reduce("", String::concat));
+            out.append("|\n");
+            return 0;
+        }).sum();
+        out.append(IntStream.range(0, size).boxed().map(x -> block).reduce("", String::concat));
+
+
+        return out.toString();
+    }
+
+    private String ceilToString(int x, int y)
+    {
+        if(ceilIsEmpty(x,y)) return " ";
+        if(getCheck(x,y).getColour() == WHITE) return "☺";
+        else  return "☻";
     }
 }

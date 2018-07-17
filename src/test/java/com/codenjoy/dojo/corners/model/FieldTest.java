@@ -28,11 +28,35 @@ public class FieldTest
     public void createAndInitTest()
     {
         int fieldSize = 8;
-        int houseHorisontal = 3;
+        int houseHorizontal = 3;
         int houseVertical = 3;
-        Field field = new Field(fieldSize,houseHorisontal,houseVertical);
+        Field field = new Field(fieldSize,houseHorizontal,houseVertical);
         Assert.assertEquals(fieldSize, field.getSize());
-        Assert.assertEquals(houseHorisontal*houseVertical*2, field.getChecks().size());
+        Assert.assertEquals(houseHorizontal*houseVertical*2, field.getChecks().size());
+    }
+
+    @Test
+    public void toStringTest()
+    {
+        Field field = new Field(8,3,3);
+        Assert.assertEquals("+-+-+-+-+-+-+-+-+\n" +
+                "| | | | | |☻|☻|☻|\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "| | | | | |☻|☻|☻|\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "| | | | | |☻|☻|☻|\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "| | | | | | | | |\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "| | | | | | | | |\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "|☺|☺|☺| | | | | |\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "|☺|☺|☺| | | | | |\n" +
+                "+-+-+-+-+-+-+-+-+\n" +
+                "|☺|☺|☺| | | | | |\n" +
+                "+-+-+-+-+-+-+-+-",
+                field.toString());
     }
 
 }
