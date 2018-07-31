@@ -1,5 +1,7 @@
 package com.codenjoy.dojo.corners.model;
 
+import com.codenjoy.dojo.corners.model.players.ConsolePalyer;
+import com.codenjoy.dojo.corners.model.players.Player;
 import com.codenjoy.dojo.corners.model.services.Colours;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,8 +12,8 @@ public class GameTest {
   public void createGameTest()
   {
     Game game = new Game();
-    Player player1 = new Player();
-    Player player2 = new Player();
+    Player player1 = new ConsolePalyer();
+    Player player2 = new ConsolePalyer();
 
     Assert.assertTrue(game.addPlayer(player1, Colours.BLACK));
     Assert.assertTrue(game.addPlayer(player2));
@@ -23,8 +25,8 @@ public class GameTest {
   public void startGameTest()
   {
     Game game = new Game();
-    Player player1 = new Player();
-    Player player2 = new Player();
+    Player player1 = new ConsolePalyer();
+    Player player2 = new ConsolePalyer();
 
     game.addPlayer(player1, Colours.BLACK);
     game.addPlayer(player2);
@@ -40,8 +42,8 @@ public class GameTest {
   public void setSizeTest()
   {
     Game game = new Game();
-    Player player1 = new Player();
-    Player player2 = new Player();
+    Player player1 = new ConsolePalyer();
+    Player player2 = new ConsolePalyer();
 
     game.setSize(10,4,4);
     game.addPlayer(player1);
@@ -56,8 +58,8 @@ public class GameTest {
   public void fewMovesTest()
   {
     Game game = new Game();
-    Player player1 = new Player();
-    Player player2 = new Player();
+    Player player1 = new ConsolePalyer();
+    Player player2 = new ConsolePalyer();
     game.addPlayer(player1);
     game.addPlayer(player2);
     game.start();
