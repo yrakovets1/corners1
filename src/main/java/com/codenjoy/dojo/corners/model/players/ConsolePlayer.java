@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConsolePalyer implements Player {
+public class ConsolePlayer implements Player {
 
     public List<Integer> makeTurn(Game game)
     {
