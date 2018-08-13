@@ -1,13 +1,12 @@
 package com.codenjoy.dojo.corners.model.players;
 
 import com.codenjoy.dojo.corners.model.Game;
-
-import java.util.List;
+import com.codenjoy.dojo.corners.model.items.Move;
 
 public class AIPlayer implements Player {
 
     @Override
-    public List<Integer> makeTurn(Game game) {
+    public Move makeTurn(Game game) {
         return null;
     }
 }

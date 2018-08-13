@@ -1,5 +1,6 @@
 package com.codenjoy.dojo.corners.model;
 
+import com.codenjoy.dojo.corners.model.items.Move;
 import com.codenjoy.dojo.corners.model.players.ConsolePalyer;
 import com.codenjoy.dojo.corners.model.players.Player;
 import com.codenjoy.dojo.corners.model.services.Colours;
@@ -64,8 +65,8 @@ public class GameTest {
     game.addPlayer(player2);
     game.start();
 
-    game.makeMove(player1, 2, 2, 2, 3);
-    game.makeMove(player2, 5, 5, 5, 4);
+    game.makeMove(player1, new Move(2, 2, 2, 3));
+    game.makeMove(player2, new Move(5, 5, 5, 4));
     Assert.assertEquals(Colours.WHITE, game.getField().getCheck(2,3).getColour());
     Assert.assertEquals(Colours.BLACK, game.getField().getCheck(5,4).getColour());
 

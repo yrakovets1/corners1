@@ -1,6 +1,7 @@
 package com.codenjoy.dojo.corners.model;
 
 import com.codenjoy.dojo.corners.model.items.Check;
+import com.codenjoy.dojo.corners.model.items.Move;
 import com.codenjoy.dojo.corners.model.players.Player;
 import com.codenjoy.dojo.corners.model.services.Colours;
 import com.codenjoy.dojo.corners.model.services.GameOverException;
@@ -65,18 +66,13 @@ public class Game {
         return field;
     }
 
-    public void makeMove(Player player, List<Integer> coords)
-    {
-        makeMove(player, coords.get(0), coords.get(1), coords.get(2), coords.get(3));
-    }
-
-    public void makeMove(Player player, int xFrom, int yFrom, int xTo, int yTo) {
+    public void makeMove(Player player,  Move move) {
         if (turn == null) throw new WrongStepException("The game isn't started jet");
         if (players.get(turn) != player) throw new WrongStepException("There is another player's turn");
-            Check check = field.getCheck(xFrom,yFrom);
+            Check check = field.getCheck(move.getXFrom(), move.getYFrom());
         if(check.getColour() != turn) throw new WrongStepException("There is another player's check");
 
-        check.moveTo(xTo,yTo);
+        check.moveTo(move.getXTo(),move.getYTo());
 
         checkGameOver();
 
