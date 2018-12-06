@@ -22,6 +22,7 @@ public class CommandLinePlayTest {
       try {
         //another change
         //fghgfhgfh
+        //dsfadsfasdf
         game.makeMove(game.getPlayer(active), game.getPlayer(active).makeTurn(game));
         if(active == Colours.WHITE){
           active = Colours.BLACK;
